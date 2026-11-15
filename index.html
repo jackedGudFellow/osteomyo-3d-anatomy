@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>OsteoMyo 3D — Full Human Body, Skeleton, Muscles, Organs, Brain &amp; Nervous System Atlas</title>
+    <meta
+      name="description"
+      content="Comprehensive 3D Human Anatomy Atlas with 206 Bones, 92 Muscles with Origin/Insertion Vectors, 14 Visceral Organs, Brain and Peripheral Nervous System, and Clinical Medical Quiz."
+    />
+    <meta name="keywords" content="anatomy, 3D skeleton, human anatomy, medical atlas, osteology, myology, neurology, medical quiz, Three.js, BodyParts3D" />
+    <meta name="author" content="OsteoMyo 3D Atlas" />
+    <meta name="theme-color" content="#0284c7" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://deploy-project-39c77b.netlify.app/" />
+    <meta property="og:title" content="OsteoMyo 3D — Full Human Body Clinical Atlas" />
+    <meta property="og:description" content="Explore 206 Bones, 92 Muscle Insertion Vectors, 14 Organs, Brain and Nervous System with interactive 3D clinical study tools." />
+    <meta property="og:image" content="https://deploy-project-39c77b.netlify.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OsteoMyo 3D — Full Human Body Clinical Atlas" />
+    <meta name="twitter:description" content="Explore 206 Bones, 92 Muscles, 14 Organs, Brain and Nerves with real 3D anatomical models." />
+    <meta name="twitter:image" content="https://deploy-project-39c77b.netlify.app/og-image.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://deploy-project-39c77b.netlify.app/" />
+
+    <!-- PWA Web App Manifest & Apple Touch -->
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+    <script type="module" crossorigin src="./assets/index-D9RsiTcP.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/anatomyData-Cqk5KDrX.js">
+    <link rel="modulepreload" crossorigin href="./assets/organsNervousData-D8Vb_utx.js">
+    <link rel="modulepreload" crossorigin href="./assets/three-JquuAaC5.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-BJXGCu9g.css">
+  </head>
+  <body class="light-theme">
+    <!-- Screen Reader Skip Links -->
+    <a href="#bone-search" class="skip-link">Skip to Search</a>
+    <a href="#inspector-panel" class="skip-link">Skip to Inspector</a>
+
+    <div id="app">
+      <!-- 3D WebGL Viewport -->
+      <canvas id="anatomy-canvas" role="region" aria-label="3D Interactive Anatomical Viewport"></canvas>
+
+      <!-- Floating 3D Hover Tooltip -->
+      <div id="hover-tooltip" class="hover-tooltip hidden" role="tooltip" aria-hidden="true"></div>
+
+      <!-- Top Medical Navigation, Camera Preset & Theme Toggle Bar -->
+      <header class="top-bar" role="banner">
+        <div class="brand-block">
+          <div class="brand-logo" aria-hidden="true">🫀</div>
+          <div>
+            <h1 class="brand-title">OsteoMyo 3D Full Body Atlas</h1>
+            <p class="brand-subtitle">
+              206 Bones • 354 Muscle Insertions • 14 Organs • Brain &amp; Nervous System
+            </p>
+          </div>
+        </div>
+
+        <nav class="camera-presets" id="camera-presets" aria-label="Camera Presets">
+          <span class="preset-label">Camera:</span>
+          <button type="button" class="preset-btn active" data-preset="full">Full Body</button>
+          <button type="button" class="preset-btn" data-preset="skull">Skull &amp; Brain</button>
+          <button type="button" class="preset-btn" data-preset="ossicles">Ear Ossicles</button>
+          <button type="button" class="preset-btn" data-preset="spine">Thorax &amp; Organs</button>
+          <button type="button" class="preset-btn" data-preset="upper">Shoulder &amp; Plexus</button>
+          <button type="button" class="preset-btn" data-preset="hand">Wrist &amp; Hand</button>
+          <button type="button" class="preset-btn" data-preset="pelvis">Abdomen &amp; Pelvis</button>
+          <button type="button" class="preset-btn" data-preset="foot">Ankle &amp; Foot</button>
+        </nav>
+
+        <div class="top-actions">
+          <div class="legend-pills" aria-label="Anatomical Pin Legend">
+            <span class="legend-item"><i class="dot dot-origin" aria-hidden="true"></i> Origin (418)</span>
+            <span class="legend-item"><i class="dot dot-insertion" aria-hidden="true"></i> Insertion (354)</span>
+            <span class="legend-item"><i class="dot dot-nerve" aria-hidden="true"></i> CNS/PNS Nerves</span>
+          </div>
+          <button type="button" id="theme-toggle-btn" class="theme-btn" title="Switch between White Studio and Black Clinical Theme (Shortcut: T)" aria-label="Toggle Color Theme">
+            🌙 Switch to Black Theme <span class="kbd-hint">[T]</span>
+          </button>
+          <button type="button" id="quiz-toggle-btn" class="quiz-btn" aria-label="Toggle Clinical Medical Quiz">
+            🎓 Clinical Quiz <span class="kbd-hint">[Q]</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Interactive Medical Quiz Banner (Hidden by default) -->
+      <section id="quiz-banner" class="quiz-banner hidden" role="region" aria-label="Interactive Clinical Anatomy Quiz">
+        <div class="quiz-header">
+          <span class="quiz-badge" id="quiz-mode-type">FULL ANATOMY CLINICAL QUIZ</span>
+          <div class="quiz-stats" aria-live="polite">
+            <span id="quiz-score">Score: 0 / 0</span>
+            <span id="quiz-streak">Streak: 0 🔥</span>
+          </div>
+        </div>
+        <p id="quiz-prompt" class="quiz-prompt" aria-live="polite">
+          Click on the target anatomical structure directly in the 3D viewport...
+        </p>
+        <div id="quiz-feedback" class="quiz-feedback" aria-live="assertive"></div>
+        <div class="quiz-controls">
+          <button type="button" id="quiz-hint-btn" class="ctrl-btn">🔍 Zoom to Region Hint</button>
+          <button type="button" id="quiz-reveal-btn" class="ctrl-btn">💡 Reveal Answer</button>
+          <button type="button" id="quiz-next-btn" class="ctrl-btn primary">Next Question →</button>
+        </div>
+      </section>
+
+      <!-- Left Sidebar: Search, 4 System Tabs, Live Biomechanics, Dissection Layers & Catalog -->
+      <aside class="left-panel" id="catalog-panel" aria-label="Anatomy Catalog & Dissection Controls">
+        <div class="search-section">
+          <div class="catalog-mode-switch" role="tablist" aria-label="Anatomical System Catalog">
+            <button type="button" id="tab-bones" class="mode-tab active" role="tab" aria-selected="true">🦴 Bones (206)</button>
+            <button type="button" id="tab-muscles" class="mode-tab" role="tab" aria-selected="false">💪 Muscles (92)</button>
+            <button type="button" id="tab-organs" class="mode-tab" role="tab" aria-selected="false">🫀 Organs (14)</button>
+            <button type="button" id="tab-nerves" class="mode-tab" role="tab" aria-selected="false">🧠 Brain &amp; Nerves</button>
+          </div>
+          <div class="search-input-wrap">
+            <label for="bone-search" class="visually-hidden">Search anatomical structures</label>
+            <input
+              type="text"
+              id="bone-search"
+              placeholder="Search bones, organs, brain, nerves, insertions... (/)"
+              autocomplete="off"
+              aria-label="Search bones, organs, brain, nerves, insertions"
+            />
+            <button type="button" id="clear-search" class="clear-btn hidden" title="Clear search" aria-label="Clear search input">✕</button>
+          </div>
+          <div class="region-tabs" id="region-tabs" role="group" aria-label="Anatomical Region Filter"></div>
+        </div>
+
+        <!-- Live Biomechanics & 3D Body System Layer Controls -->
+        <div class="study-controls">
+          <div class="control-row">
+            <label for="motion-mode-select">⚡ Live Physiology:</label>
+            <select id="motion-mode-select" class="ui-select" aria-label="Live Physiology Motion Simulation">
+              <option value="breathing" selected>🫁 Breathing + 72 BPM Heartbeat</option>
+              <option value="flexion">💪 Elbow &amp; Knee Flexion/Extension</option>
+              <option value="abduction">🙌 Shoulder Abduction &amp; Scapula</option>
+              <option value="gait">🏃 Walking Gait Cycle</option>
+              <option value="mastication">🦷 TMJ Jaw Mastication</option>
+              <option value="static">⏸️ Static Dissection Pose</option>
+            </select>
+          </div>
+
+          <div class="control-row">
+            <label for="muscle-mode-select">3D Muscles:</label>
+            <select id="muscle-mode-select" class="ui-select" aria-label="3D Muscle Layer Display Mode">
+              <option value="attached" selected>Attached to Selected Bone</option>
+              <option value="all">Show All 3D Muscles &amp; Tendons</option>
+              <option value="insertions_map">Netter Insertion/Origin Pins Only</option>
+              <option value="none">Hide Muscles (Bones/Organs/Nerves)</option>
+            </select>
+          </div>
+
+          <div class="control-row">
+            <label for="explode-slider">
+              Disarticulate (Explode): <span id="explode-val">0%</span>
+            </label>
+            <input
+              type="range"
+              id="explode-slider"
+              min="0"
+              max="100"
+              value="0"
+              class="ui-slider"
+              aria-label="Disarticulate and explode skeletal joints"
+            />
+          </div>
+
+          <!-- 3D Body Layer Toggles (Organs, Brain & Nervous System, Body Envelope) -->
+          <div class="toggle-grid toggle-grid-3">
+            <button type="button" id="btn-organs" class="toggle-btn active" title="Toggle Internal Visceral Organs (Shortcut: O)" aria-label="Toggle Organs">
+              🫀 Organs <span class="kbd-hint">O</span>
+            </button>
+            <button type="button" id="btn-nerves" class="toggle-btn active" title="Toggle Brain, Spinal Cord & Peripheral Nerves (Shortcut: N)" aria-label="Toggle Brain and Nerves">
+              🧠 Brain &amp; Nerves <span class="kbd-hint">N</span>
+            </button>
+            <button type="button" id="btn-body" class="toggle-btn active" title="Toggle Translucent Human Body Contour (Shortcut: B)" aria-label="Toggle Body Contour Shell">
+              👤 Body Shell <span class="kbd-hint">B</span>
+            </button>
+          </div>
+
+          <!-- Osteology & Dissection Toggles -->
+          <div class="toggle-grid">
+            <button type="button" id="btn-pins" class="toggle-btn" title="Toggle all 354 Insertion & 418 Origin footprint pins" aria-label="Toggle Attachment Pins">
+              📍 All Pins
+            </button>
+            <button type="button" id="btn-isolate" class="toggle-btn" title="Shortcut: I" aria-label="Isolate Selected Structure">
+              🎯 Isolate <span class="kbd-hint">I</span>
+            </button>
+            <button type="button" id="btn-xray" class="toggle-btn" title="Shortcut: X" aria-label="Toggle X-Ray Transparency">
+              🩻 X-Ray <span class="kbd-hint">X</span>
+            </button>
+            <button type="button" id="btn-reset" class="toggle-btn" title="Shortcut: R" aria-label="Reset All Study Views">
+              ↺ Reset <span class="kbd-hint">R</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="catalog-header">
+          <span id="catalog-count" aria-live="polite">Showing 206 of 206 Bones</span>
+          <span class="catalog-hint">Click to inspect in 3D</span>
+        </div>
+
+        <div id="bone-list" class="bone-list" role="region" aria-label="Structure List"></div>
+      </aside>
+
+      <!-- Right Sidebar: Complete Inspector for Bones, Muscles, Internal Organs & Brain/Nervous System -->
+      <aside class="right-panel" id="inspector-panel" aria-label="Clinical Structure Inspector" aria-live="polite">
+        <div id="inspector-content" class="inspector-content"></div>
+      </aside>
+    </div>
+
+  </body>
+</html>

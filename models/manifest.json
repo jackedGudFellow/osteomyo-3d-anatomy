@@ -1,0 +1,500 @@
+{
+  "version": "1.0.0",
+  "attribution": "BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan",
+  "citation": "Mitsuhashi N et al., Nucleic Acids Res. 2009;37:D782-5",
+  "models": {
+    "femur_r": {
+      "fma": "FMA24474",
+      "name": "right femur",
+      "vertexCount": 1574,
+      "triangleCount": 3102,
+      "sizeBytes": 48918,
+      "worldCenter": [
+        -0.09101414999999999,
+        0.601201,
+        0.0808611
+      ],
+      "bounds": [
+        0.11823969999999999,
+        0.466102,
+        0.06266179999999999
+      ]
+    },
+    "femur_l": {
+      "fma": "FMA24475",
+      "name": "left femur",
+      "vertexCount": 1623,
+      "triangleCount": 3204,
+      "sizeBytes": 50400,
+      "worldCenter": [
+        0.0911016,
+        0.6011475000000001,
+        0.0808791
+      ],
+      "bounds": [
+        0.11827080000000001,
+        0.46618300000000007,
+        0.06279380000000001
+      ]
+    },
+    "tibia_r": {
+      "fma": "FMA24477",
+      "name": "right tibia",
+      "vertexCount": 857,
+      "triangleCount": 1664,
+      "sizeBytes": 26623,
+      "worldCenter": [
+        -0.0722845,
+        0.18394142000000002,
+        0.08345395
+      ],
+      "bounds": [
+        0.07413699999999998,
+        0.37995716,
+        0.06276209999999999
+      ]
+    },
+    "tibia_l": {
+      "fma": "FMA24478",
+      "name": "left tibia",
+      "vertexCount": 880,
+      "triangleCount": 1692,
+      "sizeBytes": 27266,
+      "worldCenter": [
+        0.07224459999999999,
+        0.183883335,
+        0.08324855
+      ],
+      "bounds": [
+        0.0744208,
+        0.37995733000000004,
+        0.0625329
+      ]
+    },
+    "fibula_r": {
+      "fma": "FMA24480",
+      "name": "right fibula",
+      "vertexCount": 593,
+      "triangleCount": 1142,
+      "sizeBytes": 18326,
+      "worldCenter": [
+        -0.10225475,
+        0.16693504999999997,
+        0.0633281
+      ],
+      "bounds": [
+        0.035820500000000005,
+        0.3844299,
+        0.02968140000000001
+      ]
+    },
+    "fibula_l": {
+      "fma": "FMA24481",
+      "name": "left fibula",
+      "vertexCount": 577,
+      "triangleCount": 1124,
+      "sizeBytes": 18000,
+      "worldCenter": [
+        0.1023185,
+        0.16697019999999999,
+        0.06332650000000001
+      ],
+      "bounds": [
+        0.03557900000000001,
+        0.3843216,
+        0.029585000000000007
+      ]
+    },
+    "patella_r": {
+      "fma": "FMA24486",
+      "name": "right patella",
+      "vertexCount": 178,
+      "triangleCount": 306,
+      "sizeBytes": 5253,
+      "worldCenter": [
+        -0.08145440000000001,
+        0.38114099999999995,
+        0.1118595
+      ],
+      "bounds": [
+        0.0416672,
+        0.03931000000000001,
+        0.02173499999999999
+      ]
+    },
+    "patella_l": {
+      "fma": "FMA24487",
+      "name": "left patella",
+      "vertexCount": 180,
+      "triangleCount": 310,
+      "sizeBytes": 5321,
+      "worldCenter": [
+        0.08140825,
+        0.38112999999999997,
+        0.11182600000000001
+      ],
+      "bounds": [
+        0.04163150000000001,
+        0.03926599999999997,
+        0.02185000000000001
+      ]
+    },
+    "humerus_r": {
+      "fma": "FMA23130",
+      "name": "right humerus",
+      "vertexCount": 2233,
+      "triangleCount": 3784,
+      "sizeBytes": 62765,
+      "worldCenter": [
+        -0.1904655,
+        1.18287,
+        0.07562905
+      ],
+      "bounds": [
+        0.10075099999999998,
+        0.30733999999999995,
+        0.049179900000000006
+      ]
+    },
+    "humerus_l": {
+      "fma": "FMA23131",
+      "name": "left humerus",
+      "vertexCount": 2073,
+      "triangleCount": 3844,
+      "sizeBytes": 62017,
+      "worldCenter": [
+        0.1904165,
+        1.182865,
+        0.07564245
+      ],
+      "bounds": [
+        0.100687,
+        0.30730999999999997,
+        0.0491731
+      ]
+    },
+    "radius_r": {
+      "fma": "FMA23464",
+      "name": "right radius",
+      "vertexCount": 388,
+      "triangleCount": 672,
+      "sizeBytes": 11543,
+      "worldCenter": [
+        -0.24968400000000002,
+        0.9204425,
+        0.0940053
+      ],
+      "bounds": [
+        0.05970200000000003,
+        0.22921499999999995,
+        0.06580539999999999
+      ]
+    },
+    "radius_l": {
+      "fma": "FMA23465",
+      "name": "left radius",
+      "vertexCount": 368,
+      "triangleCount": 632,
+      "sizeBytes": 10878,
+      "worldCenter": [
+        0.24948949999999998,
+        0.9205865,
+        0.09436065
+      ],
+      "bounds": [
+        0.05930699999999997,
+        0.2288469999999999,
+        0.0657827
+      ]
+    },
+    "ulna_r": {
+      "fma": "FMA23467",
+      "name": "right ulna",
+      "vertexCount": 500,
+      "triangleCount": 834,
+      "sizeBytes": 14614,
+      "worldCenter": [
+        -0.22203,
+        0.9288115000000001,
+        0.0841466
+      ],
+      "bounds": [
+        0.05029800000000001,
+        0.24727700000000008,
+        0.07869480000000001
+      ]
+    },
+    "ulna_l": {
+      "fma": "FMA23468",
+      "name": "left ulna",
+      "vertexCount": 496,
+      "triangleCount": 824,
+      "sizeBytes": 14377,
+      "worldCenter": [
+        0.222006,
+        0.928743,
+        0.08391565000000001
+      ],
+      "bounds": [
+        0.050227999999999995,
+        0.24745400000000006,
+        0.0787267
+      ]
+    },
+    "clavicle_r": {
+      "fma": "FMA13322",
+      "name": "right clavicle",
+      "vertexCount": 583,
+      "triangleCount": 1146,
+      "sizeBytes": 18060,
+      "worldCenter": [
+        -0.07746932499999999,
+        1.33203,
+        0.10068025000000001
+      ],
+      "bounds": [
+        0.13561535,
+        0.046820000000000084,
+        0.09253550000000002
+      ]
+    },
+    "clavicle_l": {
+      "fma": "FMA13323",
+      "name": "left clavicle",
+      "vertexCount": 602,
+      "triangleCount": 1176,
+      "sizeBytes": 18576,
+      "worldCenter": [
+        0.07616036500000001,
+        1.331855,
+        0.10073275000000001
+      ],
+      "bounds": [
+        0.13556327,
+        0.04665000000000008,
+        0.09269050000000001
+      ]
+    },
+    "scapula_r": {
+      "fma": "FMA13395",
+      "name": "right scapula",
+      "vertexCount": 13118,
+      "triangleCount": 26172,
+      "sizeBytes": 403869,
+      "worldCenter": [
+        -0.1117589,
+        1.26691,
+        0.048886625
+      ],
+      "bounds": [
+        0.1094102,
+        0.16589999999999971,
+        0.10793875
+      ]
+    },
+    "scapula_l": {
+      "fma": "FMA13396",
+      "name": "left scapula",
+      "vertexCount": 14068,
+      "triangleCount": 28106,
+      "sizeBytes": 428276,
+      "worldCenter": [
+        0.11176269999999999,
+        1.266905,
+        0.048884300000000006
+      ],
+      "bounds": [
+        0.1094026,
+        0.16590999999999978,
+        0.1079214
+      ]
+    },
+    "os_coxae_r": {
+      "fma": "FMA16586",
+      "name": "right hip bone",
+      "vertexCount": 1282,
+      "triangleCount": 2374,
+      "sizeBytes": 38275,
+      "worldCenter": [
+        -0.07383115000000001,
+        0.8550110000000001,
+        0.07006889000000001
+      ],
+      "bounds": [
+        0.14208170000000003,
+        0.205716,
+        0.13790022
+      ]
+    },
+    "os_coxae_l": {
+      "fma": "FMA16587",
+      "name": "left hip bone",
+      "vertexCount": 1257,
+      "triangleCount": 2332,
+      "sizeBytes": 37657,
+      "worldCenter": [
+        0.073752155,
+        0.8550205,
+        0.07020496999999999
+      ],
+      "bounds": [
+        0.14200369,
+        0.20613899999999996,
+        0.13778006
+      ]
+    },
+    "sacrum": {
+      "fma": "FMA16202",
+      "name": "sacrum",
+      "vertexCount": 5293,
+      "triangleCount": 9922,
+      "sizeBytes": 160327,
+      "worldCenter": [
+        -0.000694150000000001,
+        0.8550185,
+        0.037071325
+      ],
+      "bounds": [
+        0.11779410000000001,
+        0.14436300000000002,
+        0.08865015000000001
+      ]
+    },
+    "sternum": {
+      "fma": "FMA7485",
+      "name": "sternum",
+      "vertexCount": 5632,
+      "triangleCount": 8114,
+      "sizeBytes": 142737,
+      "worldCenter": [
+        0,
+        1.2446350000000002,
+        0.17231649999999998
+      ],
+      "bounds": [
+        0.0548994,
+        0.16122999999999998,
+        0.083031
+      ]
+    },
+    "frontal": {
+      "fma": "FMA52734",
+      "name": "frontal bone",
+      "vertexCount": 8472,
+      "triangleCount": 14510,
+      "sizeBytes": 243868,
+      "worldCenter": [
+        -0.0006551999999999981,
+        1.575415,
+        0.142012
+      ],
+      "bounds": [
+        0.1252946,
+        0.10905000000000009,
+        0.07074599999999999
+      ]
+    },
+    "mandible": {
+      "fma": "FMA52748",
+      "name": "mandible",
+      "vertexCount": 2845,
+      "triangleCount": 5576,
+      "sizeBytes": 86759,
+      "worldCenter": [
+        -0.0006459000000000013,
+        1.4638650000000002,
+        0.13184285
+      ],
+      "bounds": [
+        0.1064,
+        0.08446999999999982,
+        0.08397829999999998
+      ]
+    },
+    "org_stomach": {
+      "fma": "FMA7148",
+      "name": "stomach",
+      "vertexCount": 914,
+      "triangleCount": 1810,
+      "sizeBytes": 28760,
+      "worldCenter": [
+        0.038286200000000006,
+        1.0983850000000002,
+        0.13792495000000002
+      ],
+      "bounds": [
+        0.1344756,
+        0.11701000000000006,
+        0.11289010000000001
+      ]
+    },
+    "org_kidney_r": {
+      "fma": "FMA7204",
+      "name": "right kidney",
+      "vertexCount": 1163,
+      "triangleCount": 2310,
+      "sizeBytes": 36044,
+      "worldCenter": [
+        -0.0590015,
+        1.019026,
+        0.08827755000000001
+      ],
+      "bounds": [
+        0.0571478,
+        0.10442799999999997,
+        0.0471549
+      ]
+    },
+    "org_kidney_l": {
+      "fma": "FMA7205",
+      "name": "left kidney",
+      "vertexCount": 1497,
+      "triangleCount": 2982,
+      "sizeBytes": 46531,
+      "worldCenter": [
+        0.06161145,
+        1.0374670000000001,
+        0.0798882
+      ],
+      "bounds": [
+        0.05754309999999999,
+        0.10594599999999998,
+        0.04059360000000001
+      ]
+    },
+    "org_pancreas": {
+      "fma": "FMA7198",
+      "name": "pancreas",
+      "vertexCount": 12896,
+      "triangleCount": 16962,
+      "sizeBytes": 310491,
+      "worldCenter": [
+        0.007983750000000008,
+        1.04123,
+        0.12089549999999999
+      ],
+      "bounds": [
+        0.1293813,
+        0.0737399999999997,
+        0.05096699999999997
+      ]
+    },
+    "nerv_cerebellum_brainstem": {
+      "fma": "FMA67944",
+      "name": "cerebellum",
+      "vertexCount": 24324,
+      "triangleCount": 47700,
+      "sizeBytes": 735580,
+      "worldCenter": [
+        -0.0006600000000000009,
+        1.513875,
+        0.0403202
+      ],
+      "bounds": [
+        0.1065398,
+        0.05326999999999993,
+        0.0562918
+      ]
+    }
+  }
+}
