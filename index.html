@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>OsteoMyo 3D — Full Human Body, Skeleton, Muscles, Organs, Brain &amp; Nervous System Atlas</title>
     <meta
       name="description"
@@ -37,11 +40,11 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
-    <script type="module" crossorigin src="./assets/index-D9RsiTcP.js"></script>
+    <script type="module" crossorigin src="./assets/index-eK-aaN5l.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/anatomyData-Cqk5KDrX.js">
     <link rel="modulepreload" crossorigin href="./assets/organsNervousData-D8Vb_utx.js">
     <link rel="modulepreload" crossorigin href="./assets/three-JquuAaC5.js">
-    <link rel="stylesheet" crossorigin href="./assets/index-BJXGCu9g.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DgeA0hN7.css">
   </head>
   <body class="light-theme">
     <!-- Screen Reader Skip Links -->
@@ -60,7 +63,7 @@
         <div class="brand-block">
           <div class="brand-logo" aria-hidden="true">🫀</div>
           <div>
-            <h1 class="brand-title">OsteoMyo 3D Full Body Atlas</h1>
+            <h1 class="brand-title"><span class="brand-title-full">OsteoMyo 3D Full Body Atlas</span><span class="brand-title-short">OsteoMyo 3D</span></h1>
             <p class="brand-subtitle">
               206 Bones • 354 Muscle Insertions • 14 Organs • Brain &amp; Nervous System
             </p>
@@ -86,10 +89,10 @@
             <span class="legend-item"><i class="dot dot-nerve" aria-hidden="true"></i> CNS/PNS Nerves</span>
           </div>
           <button type="button" id="theme-toggle-btn" class="theme-btn" title="Switch between White Studio and Black Clinical Theme (Shortcut: T)" aria-label="Toggle Color Theme">
-            🌙 Switch to Black Theme <span class="kbd-hint">[T]</span>
+            <span class="btn-text-full">🌙 Switch to Black Theme</span><span class="btn-text-short">🌙 Dark</span> <span class="kbd-hint">[T]</span>
           </button>
           <button type="button" id="quiz-toggle-btn" class="quiz-btn" aria-label="Toggle Clinical Medical Quiz">
-            🎓 Clinical Quiz <span class="kbd-hint">[Q]</span>
+            <span class="btn-text-full">🎓 Clinical Quiz</span><span class="btn-text-short">🎓 Quiz</span> <span class="kbd-hint">[Q]</span>
           </button>
         </div>
       </header>
@@ -116,6 +119,16 @@
 
       <!-- Left Sidebar: Search, 4 System Tabs, Live Biomechanics, Dissection Layers & Catalog -->
       <aside class="left-panel" id="catalog-panel" aria-label="Anatomy Catalog & Dissection Controls">
+        <div class="mobile-sheet-header">
+          <div class="sheet-drag-bar" aria-hidden="true"></div>
+          <div class="sheet-header-row">
+            <span class="sheet-title">📚 Anatomy Catalog</span>
+            <div class="sheet-header-actions">
+              <button type="button" class="sheet-switch-btn" id="switch-to-inspector">🩺 Inspector</button>
+              <button type="button" class="sheet-close-btn" id="close-left-sheet" aria-label="Close Catalog">✕</button>
+            </div>
+          </div>
+        </div>
         <div class="search-section">
           <div class="catalog-mode-switch" role="tablist" aria-label="Anatomical System Catalog">
             <button type="button" id="tab-bones" class="mode-tab active" role="tab" aria-selected="true">🦴 Bones (206)</button>
@@ -126,7 +139,8 @@
           <div class="search-input-wrap">
             <label for="bone-search" class="visually-hidden">Search anatomical structures</label>
             <input
-              type="text"
+              type="search"
+              enterkeyhint="search"
               id="bone-search"
               placeholder="Search bones, organs, brain, nerves, insertions... (/)"
               autocomplete="off"
@@ -138,7 +152,11 @@
         </div>
 
         <!-- Live Biomechanics & 3D Body System Layer Controls -->
-        <div class="study-controls">
+        <button type="button" id="toggle-study-controls" class="study-controls-toggle" aria-expanded="false" aria-controls="study-controls">
+          <span>⚙️ Layers, Motion &amp; Dissection</span>
+          <span class="study-toggle-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="study-controls" id="study-controls">
           <div class="control-row">
             <label for="motion-mode-select">⚡ Live Physiology:</label>
             <select id="motion-mode-select" class="ui-select" aria-label="Live Physiology Motion Simulation">
@@ -216,6 +234,16 @@
 
       <!-- Right Sidebar: Complete Inspector for Bones, Muscles, Internal Organs & Brain/Nervous System -->
       <aside class="right-panel" id="inspector-panel" aria-label="Clinical Structure Inspector" aria-live="polite">
+        <div class="mobile-sheet-header">
+          <div class="sheet-drag-bar" aria-hidden="true"></div>
+          <div class="sheet-header-row">
+            <span class="sheet-title">🩺 Clinical Inspector</span>
+            <div class="sheet-header-actions">
+              <button type="button" class="sheet-switch-btn" id="switch-to-catalog">📚 Catalog</button>
+              <button type="button" class="sheet-close-btn" id="close-right-sheet" aria-label="Close Inspector">✕</button>
+            </div>
+          </div>
+        </div>
         <div id="inspector-content" class="inspector-content"></div>
       </aside>
     </div>

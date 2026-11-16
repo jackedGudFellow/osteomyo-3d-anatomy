@@ -1,10 +1,10 @@
-const CACHE_VERSION = 'osteomyo-v2';
+const CACHE_VERSION = 'osteomyo-v4';
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/favicon.svg',
-  '/icons/icon-192.png'
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './favicon.svg',
+  './icons/icon-192.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -49,7 +49,7 @@ self.addEventListener('fetch', (event) => {
         let timedOut = false;
         const timer = setTimeout(() => {
           timedOut = true;
-          caches.match('/index.html').then((cached) => {
+          caches.match('./index.html').then((cached) => {
             if (cached) resolve(cached);
           });
         }, 3500);
@@ -65,7 +65,7 @@ self.addEventListener('fetch', (event) => {
           })
           .catch(() => {
             clearTimeout(timer);
-            caches.match('/index.html').then((cached) => {
+            caches.match('./index.html').then((cached) => {
               if (cached) resolve(cached);
               else resolve(new Response('Offline - please reconnect', { status: 503 }));
             });
@@ -76,7 +76,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Hashed / Versioned assets & static 3D models: Cache-First
-  if (url.pathname.startsWith('/assets/') || url.pathname.startsWith('/models/')) {
+  if (url.pathname.includes('/assets/') || url.pathname.includes('/models/')) {
     event.respondWith(
       caches.match(req).then((cached) => {
         if (cached) return cached;
