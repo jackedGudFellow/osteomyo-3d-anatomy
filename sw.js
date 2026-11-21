@@ -8,9 +8,9 @@ const SHELL_URLS = [
   './manifest.webmanifest',
   './favicon.svg',
   './icons/icon-192.png',
-  './assets/index-eK-aaN5l.js',
-  './assets/anatomyData-Cqk5KDrX.js',
-  './assets/organsNervousData-D8Vb_utx.js',
+  './assets/index-LzWiu0sA.js',
+  './assets/anatomyData-Zw_pcp_B.js',
+  './assets/organsNervousData-pTzABFaP.js',
   './assets/three-JquuAaC5.js',
   './assets/index-DgeA0hN7.css',
   './extras/credits.css',
@@ -34,6 +34,9 @@ self.addEventListener('install', (event) => {
 });
 
 async function warmModels(cache) {
+  // Don't spend a visitor's data on a background download.
+  const conn = self.navigator && self.navigator.connection;
+  if (conn && (conn.saveData || /(^|-)2g$|^3g$/.test(conn.effectiveType || ''))) return;
   const res = await fetch('./models/manifest.json', { cache: 'no-cache' });
   if (!res.ok) return;
   const manifest = await res.json();
