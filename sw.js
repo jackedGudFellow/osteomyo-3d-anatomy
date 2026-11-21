@@ -1,28 +1,56 @@
-const CACHE_VERSION = 'osteomyo-v4';
-const PRECACHE_URLS = [
+const CACHE_VERSION = 'osteomyo-v5';
+
+// App shell: everything index.html needs to render, so a first visit followed by
+// an offline reload works. Installed atomically (install fails if any is missing).
+const SHELL_URLS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './favicon.svg',
-  './icons/icon-192.png'
+  './icons/icon-192.png',
+  './assets/index-eK-aaN5l.js',
+  './assets/anatomyData-Cqk5KDrX.js',
+  './assets/organsNervousData-D8Vb_utx.js',
+  './assets/three-JquuAaC5.js',
+  './assets/index-DgeA0hN7.css',
+  './assets/credits.css',
+  './assets/credits.js',
+  './models/manifest.json'
 ];
+
+// Hashed build output (name-<hash>.js/css) never changes for a given URL.
+const HASHED_RE = /-[A-Za-z0-9_-]{8}\.(?:js|css)$/;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_VERSION).then((cache) => cache.addAll(PRECACHE_URLS)).then(() => self.skipWaiting())
+    (async () => {
+      const cache = await caches.open(CACHE_VERSION);
+      await cache.addAll(SHELL_URLS);
+      // Warm the 3D models in the background; failures here must not block install.
+      event.waitUntil(warmModels(cache).catch(() => {}));
+      await self.skipWaiting();
+    })()
   );
 });
+
+async function warmModels(cache) {
+  const res = await fetch('./models/manifest.json', { cache: 'no-cache' });
+  if (!res.ok) return;
+  const manifest = await res.json();
+  for (const name of Object.keys(manifest.models || {})) {
+    const url = `./models/${name}.bin`;
+    if (await cache.match(url)) continue;
+    try {
+      const r = await fetch(url);
+      if (r.ok) await cache.put(url, r);
+    } catch (_) { /* offline or flaky: it will be cached on first use instead */ }
+  }
+}
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_VERSION) {
-            return caches.delete(key);
-          }
-        })
-      )
+      Promise.all(keys.filter((key) => key !== CACHE_VERSION).map((key) => caches.delete(key)))
     ).then(() => self.clients.claim())
   );
 });
@@ -33,78 +61,72 @@ self.addEventListener('message', (event) => {
   }
 });
 
+// Fetch and store a fresh copy. Resolves to the response; storing never blocks it.
+function fetchAndCache(req, init) {
+  return fetch(init ? req.url : req, init).then((res) => {
+    if (res && res.status === 200) {
+      const copy = res.clone();
+      caches.open(CACHE_VERSION).then((cache) => cache.put(init ? req.url : req, copy)).catch(() => {});
+    }
+    return res;
+  });
+}
+
+function staleWhileRevalidate(event, req) {
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      const network = fetchAndCache(req).catch(() => cached);
+      if (cached) {
+        event.waitUntil(network.catch(() => {}));
+        return cached;
+      }
+      return network.then((res) => res || Response.error());
+    })
+  );
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
   const url = new URL(req.url);
-
-  // Cross-origin: let standard network handle
   if (url.origin !== self.location.origin) return;
 
-  // Navigation requests: network-first with timeout fallback to cached index
+  // Navigations: network-first, but fall back to the cached shell if the network
+  // is offline or slower than 3.5s. A late network response still refreshes the cache.
   if (req.mode === 'navigate') {
     event.respondWith(
-      new Promise((resolve) => {
-        let timedOut = false;
-        const timer = setTimeout(() => {
-          timedOut = true;
-          caches.match('./index.html').then((cached) => {
-            if (cached) resolve(cached);
-          });
-        }, 3500);
-
-        fetch(req)
-          .then((response) => {
-            clearTimeout(timer);
-            if (!timedOut) {
-              const resClone = response.clone();
-              caches.open(CACHE_VERSION).then((cache) => cache.put(req, resClone));
-              resolve(response);
-            }
-          })
-          .catch(() => {
-            clearTimeout(timer);
-            caches.match('./index.html').then((cached) => {
-              if (cached) resolve(cached);
-              else resolve(new Response('Offline - please reconnect', { status: 503 }));
-            });
-          });
-      })
+      (async () => {
+        const fallback = () => caches.match('./index.html');
+        // no-cache: revalidate with the server instead of trusting a heuristically-fresh HTTP cache entry
+        const network = fetchAndCache(req, { cache: 'no-cache', credentials: 'same-origin' });
+        const timeout = new Promise((resolve) => setTimeout(() => resolve(null), 3500));
+        try {
+          const first = await Promise.race([network, timeout]);
+          if (first) return first;
+          const cached = await fallback();
+          if (cached) {
+            event.waitUntil(network.catch(() => {}));
+            return cached;
+          }
+          return await network; // nothing cached yet: keep waiting for the network
+        } catch (_) {
+          return (await fallback()) || new Response('Offline - please reconnect', { status: 503 });
+        }
+      })()
     );
     return;
   }
 
-  // Hashed / Versioned assets & static 3D models: Cache-First
-  if (url.pathname.includes('/assets/') || url.pathname.includes('/models/')) {
+  // Hashed build output is immutable: cache-first.
+  if (HASHED_RE.test(url.pathname)) {
     event.respondWith(
-      caches.match(req).then((cached) => {
-        if (cached) return cached;
-        return fetch(req).then((res) => {
-          if (res && res.status === 200) {
-            const resClone = res.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put(req, resClone));
-          }
-          return res;
-        });
-      })
+      caches.match(req).then((cached) => cached || fetchAndCache(req))
     );
     return;
   }
 
-  // Other assets: Stale-While-Revalidate
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      const fetchPromise = fetch(req)
-        .then((networkRes) => {
-          if (networkRes && networkRes.status === 200) {
-            const resClone = networkRes.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put(req, resClone));
-          }
-          return networkRes;
-        })
-        .catch(() => cached);
-      return cached || fetchPromise;
-    })
-  );
+  // Everything else (models/*.bin, credits.*, icons, ...) is not content-hashed, so
+  // serve the cached copy instantly and refresh it in the background.
+  staleWhileRevalidate(event, req);
 });
