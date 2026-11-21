@@ -1,7 +1,7 @@
 {
   "name": "OsteoMyo 3D — Full Body Anatomy Atlas",
   "short_name": "OsteoMyo 3D",
-  "description": "Interactive 3D Human Anatomy Atlas: 206 Bones, 92 Muscles, 14 Visceral Organs, Brain & Nerves with Clinical Quiz.",
+  "description": "Interactive 3D Human Anatomy Atlas: 206 Bones, 92 Muscles, 17 Visceral Organs, Brain & Nerves with Clinical Quiz.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

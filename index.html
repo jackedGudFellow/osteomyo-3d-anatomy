@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -9,7 +10,7 @@
     <title>OsteoMyo 3D — Full Human Body, Skeleton, Muscles, Organs, Brain &amp; Nervous System Atlas</title>
     <meta
       name="description"
-      content="Comprehensive 3D Human Anatomy Atlas with 206 Bones, 92 Muscles with Origin/Insertion Vectors, 14 Visceral Organs, Brain and Peripheral Nervous System, and Clinical Medical Quiz."
+      content="Comprehensive 3D Human Anatomy Atlas with 206 Bones, 92 Muscles with Origin/Insertion Vectors, 17 Visceral Organs, Brain and Peripheral Nervous System, and Clinical Medical Quiz."
     />
     <meta name="keywords" content="anatomy, 3D skeleton, human anatomy, medical atlas, osteology, myology, neurology, medical quiz, Three.js, BodyParts3D" />
     <meta name="author" content="OsteoMyo 3D Atlas" />
@@ -19,7 +20,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://deploy-project-39c77b.netlify.app/" />
     <meta property="og:title" content="OsteoMyo 3D — Full Human Body Clinical Atlas" />
-    <meta property="og:description" content="Explore 206 Bones, 92 Muscle Insertion Vectors, 14 Organs, Brain and Nervous System with interactive 3D clinical study tools." />
+    <meta property="og:description" content="Explore 206 Bones, 92 Muscle Insertion Vectors, 17 Organs, Brain and Nervous System with interactive 3D clinical study tools." />
     <meta property="og:image" content="https://deploy-project-39c77b.netlify.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -27,7 +28,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="OsteoMyo 3D — Full Human Body Clinical Atlas" />
-    <meta name="twitter:description" content="Explore 206 Bones, 92 Muscles, 14 Organs, Brain and Nerves with real 3D anatomical models." />
+    <meta name="twitter:description" content="Explore 206 Bones, 92 Muscles, 17 Organs, Brain and Nerves with interactive 3D anatomical models." />
     <meta name="twitter:image" content="https://deploy-project-39c77b.netlify.app/og-image.png" />
 
     <!-- Canonical URL -->
@@ -66,7 +67,7 @@
           <div>
             <h1 class="brand-title"><span class="brand-title-full">OsteoMyo 3D Full Body Atlas</span><span class="brand-title-short">OsteoMyo 3D</span></h1>
             <p class="brand-subtitle">
-              206 Bones • 354 Muscle Insertions • 14 Organs • Brain &amp; Nervous System
+              206 Bones • 354 Muscle Insertions • 17 Organs • Brain &amp; Nervous System
             </p>
           </div>
         </div>
@@ -134,7 +135,7 @@
           <div class="catalog-mode-switch" role="tablist" aria-label="Anatomical System Catalog">
             <button type="button" id="tab-bones" class="mode-tab active" role="tab" aria-selected="true">🦴 Bones (206)</button>
             <button type="button" id="tab-muscles" class="mode-tab" role="tab" aria-selected="false">💪 Muscles (92)</button>
-            <button type="button" id="tab-organs" class="mode-tab" role="tab" aria-selected="false">🫀 Organs (14)</button>
+            <button type="button" id="tab-organs" class="mode-tab" role="tab" aria-selected="false">🫀 Organs (17)</button>
             <button type="button" id="tab-nerves" class="mode-tab" role="tab" aria-selected="false">🧠 Brain &amp; Nerves</button>
           </div>
           <div class="search-input-wrap">
